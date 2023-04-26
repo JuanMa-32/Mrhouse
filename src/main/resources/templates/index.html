@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<!--FRAGMENTO DE HEAD-->
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+  <div class="container-fluid">
+      
+       <!--BARRA DE NAVEGACION-->
+      <nav th:replace="/fragments/navbar :: navbar"></nav>
+
+
+      <div class="alert alert-info" role="alert" th:if="${exito != null}" th:text="${exito}"> </div>
+
+   
+
+    <!--tarjeta CON LAS PUBLICACIONES-->
+    <div class="album py-5 bg-body-tertiary">
+      <div class="container">
+       <div th:replace="/fragments/tarjeta :: tarjeta"></div>
+      </div>
+    </div>
+
+
+
+      <!--PIE DE PAGINA FIJO-->
+      <div class="container">
+      <footer th:replace="/fragments/footer :: footer"></footer>
+      </div>
+
+      
+      </div>
+
+ 
+
+   
+   
+
+   
+ 
+
+</body>
+</html>

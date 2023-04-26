@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--FRAGMENTO DE HEAD-->
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    
+  <div class="container-fluid">
+       
+    <nav class="navbar navbar-expand-lg  bg-dark rounded" data-bs-theme="dark" aria-label="Thirteenth navbar example" th:fragment="navbarLog">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+          <a class="navbar-brand col-lg-3 me-0"  th:href="@{/inicio}">Volver</a>
+        
+          <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+           
+            <li class="nav-item dropdown">
+              <li style="color: aliceblue; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><h2>MrHouse</h2></li>
+            </li>
+  
+            <li class="nav-item dropdown">
+             
+            </li>
+          
+           
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+ 
+
+<div class="container">
+     <div class="row">
+      <div class="col-lg-6">
+        <div class="bs-component">
+     <!--FORMULARIO PARA PUBLICAR UN INMUEBLE-->
+     <form class="was-validated container mx-auto" th:action="@{/inmueble/publicado}" th:object="${inmueble}" method="POST" enctype="multipart/form-data">
+     <input hidden th:value="${inmueble.id}" name="id">
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="validationCustom01" th:field="*{nombre}" th:value="${inmueble.nombre}">
+        <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+      </div>
+
+      <div class="col-md-4 ">
+        <label for="validationCustom02" class="form-label">Ubicacion</label>
+        <input type="text" class="form-control" id="validationCustom02" th:field="*{ubicacion}" th:value="${inmueble.ubicacion}">
+        <div class="text-danger" th:if="${#fields.hasErrors('ubicacion')}" th:errors="*{ubicacion}"></div>
+      </div>
+      <div class="mb-3">
+        <label for="validationTextarea" class="form-label">Textarea</label>
+        <textarea class="form-control" id="validationTextarea" placeholder="Required example textarea" th:field="*{descripcion}" th:value="${inmueble.descripcion}"></textarea>
+        <div class="text-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+      </div>
+    
+      <div class="form-check">
+        <input type="radio" class="form-check-input" id="validationFormCheck2" th:field="*{tv}" th:value="true">
+        <label class="form-check-label" for="validationFormCheck2">Tv si</label>
+        
+      </div>
+      
+      <div class="form-check mb-3">
+        <input type="radio" class="form-check-input" id="validationFormCheck3" th:field="*{tv}" th:value="false">
+        <label class="form-check-label" for="validationFormCheck3">Tv no</label>
+      </div>
+    
+      <div class="form-check">
+        <input type="radio" class="form-check-input" id="validationFormCheck2"  th:field="*{wifi}" th:value="true">
+        <label class="form-check-label" for="validationFormCheck2">Wifi si</label>
+      </div>
+
+      <div class="form-check mb-3">
+        <input type="radio" class="form-check-input" id="validationFormCheck3"  th:field="*{wifi}" th:value="false">
+        <label class="form-check-label" for="validationFormCheck3">Wifi no</label>
+      </div>
+
+      <div class="form-check">
+        <input type="radio" class="form-check-input" id="validationFormCheck2"  th:field="*{desayuno}" th:value="true">
+        <label class="form-check-label" for="validationFormCheck2">Desayuno si</label>
+      </div>
+
+      <div class="form-check mb-3">
+        <input type="radio" class="form-check-input" id="validationFormCheck3"  th:field="*{desayuno}" th:value="false" >
+        <label class="form-check-label" for="validationFormCheck3">Desayuno no</label>
+      </div>
+    
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Baños</label>
+        <input type="number" class="form-control" id="validationCustom01" th:field="*{cantBanios}" th:value="${inmueble.cantBanios}">
+      </div>
+
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Habitaciones</label>
+        <input type="number" class="form-control" id="validationCustom01" th:field="*{cantHabitacion}" th:value="${inmueble.cantHabitacion}">
+      </div>
+
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Personas</label>
+        <input type="number" class="form-control" id="validationCustom01" th:field="*{cantPersonas}">
+      </div>
+
+      <div class="mb-3">
+        <label for="validationCustom04" class="form-label">Venta/Alquiler</label>
+          <select class="form-select" id="validationCustom04" th:field="*{condicion}" th:value="${inmueble.condicion}">
+          <option th:value="vende">venta</option>
+          <option th:value="alquila">alquiler</option>
+        </select>
+        <div class="text-danger" th:if="${#fields.hasErrors('condicion')}" th:errors="*{condicion}"></div>
+      </div>
+
+      <div class="mb-3">
+        <label for="validationCustom04" class="form-label">Tipo de vivienda</label>
+          <select class="form-select" id="validationCustom04" th:field="*{tipoDeVivienda}" th:value="${inmueble.tipoDeVivienda}">
+          <option th:value="casa">casa</option>
+          <option th:value="departamento">departamento</option>
+        </select>
+        <div class="text-danger" th:if="${#fields.hasErrors('tipoDeVivienda')}" th:errors="*{tipoDeVivienda}"></div>
+      </div>
+
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">precio</label>
+        <input type="number" class="form-control" id="validationCustom01" th:field="*{precio}" th:value="${inmueble.precio}">
+      </div>
+
+      <div class="mb-3">
+        <input type="file" class="form-control" aria-label="file example" name="file" th:value="${inmueble.foto}">
+        <div class="invalid-feedback">Example invalid form file feedback</div>
+      </div>
+    
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit">Publicar</button>
+      </div>
+
+      
+    
+     
+    </form>
+
+        </div>
+      </div>
+     </div>
+
+      <!--PIE DE PAGINA FIJO-->
+    <footer th:replace="/fragments/footer :: footer"></footer>
+  </div>
+
+
+</body>
+</html>

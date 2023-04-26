@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--FRAGMENTO DE HEAD-->
+<head th:replace="/fragments/head :: head"></head>
+
+
+<body>
+    <div class="container-fluid">
+       
+      <nav class="navbar navbar-expand-lg  bg-dark rounded" data-bs-theme="dark" aria-label="Thirteenth navbar example" th:fragment="navbarLog">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+            <a class="navbar-brand col-lg-3 me-0" sec:Authorize="hasAnyRole('ROLE_ENTE','ROLE_CLIENT')" th:href="@{/inicio}">Volver</a>
+            <a class="navbar-brand col-lg-3 me-0"sec:Authorize="hasRole('ADMIN')" th:href="@{/admin/dashboard}">Volver</a>
+            <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+             
+              <li class="nav-item dropdown">
+                <li style="color: aliceblue; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><h2>MrHouse</h2></li>
+              </li>
+    
+              <li class="nav-item dropdown">
+               
+              </li>
+            
+             
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+<div class="container">
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+          <div class="col-md-7">
+            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+            </svg>
+            <h3 class="featurette-heading fw-normal lh-1" th:text="${ session.usuariosession.nombre}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> </font></font><span class="text-body-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mate.</font></font></span></h3>
+              
+                
+      
+      
+      
+          </div>
+          <div class="col-md-5">
+            <div class="col-md-7 col-lg-8">
+              <h4 class="mb-3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Editar Perfil</font></font></h4>
+              <form class="needs-validation" th:action="@{/usuario/registro}" th:object="${usuario}" method="POST">
+               
+                <input hidden th:value="${usuario.id}" name="id">
+                  <div class="col-12">
+                    <label for="email" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Correo electrónico </font></font><span class="text-body-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span></label>
+                    <input type="email" class="form-control" id="email" placeholder="tu@ejemplo.com" th:field="*{email}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                  </div>
+      
+                
+      
+                  <div class="col-12">
+                    <label for="address2" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Telefono </font></font><span class="text-body-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span></label>
+                    <input type="text" class="form-control" id="address2" placeholder="apartamento o suite" th:field="*{telefono}">
+                  </div>
+      
+                  <div class="col-md-5">
+                    <label for="country" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">País</font></font></label>
+                    <select class="form-select" id="country"  th:field="*{pais}">
+                     
+                        <option value="Argentina">Argentina</option>
+                        <option value="Brasil">Brasil</option>
+                        <option value="Uruguay">Uruguay</option>
+                        <option value="Chile">Chile</option>
+                        <option value="Paraguay">Paraguay</option>
+                        <option value="Bolivia">Bolivia</option>
+                        <option value="Peru">Peru</option>
+                        <option value="Venezuela">Venezuela</option>
+                      </select>
+                    </select>
+                   
+                  </div>
+      
+                
+                 
+                  
+                  <div class="col-md-6">
+                    <label for="cc-number" class="form-label" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Contraseña</font></font></label>
+                    <input type="password" class="form-control" id="cc-number"th:field="*{password}" >
+              
+                  </div>
+      
+               
+                  <input hidden type="text" class="form-control" id="validationCustom01" th:field="*{nombre}" th:value="${usuario.nombre}">
+                  <input hidden type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" th:value="${usuario.dni}" th:field="*{dni}">
+                  <input hidden type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" th:value="${usuario.rol}" th:field="*{rol}">
+                <button class="w-100 btn btn-primary btn-lg" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actualizar Perfil</font></font></button>
+                  
+                  
+              </form>
+            </div>
+          </div>
+      </div>
+    </div>     
+          
+      
+     
+          <div class="container">
+            <!--PIE DE PAGINA FIJO-->
+            <footer th:replace="/fragments/footer :: footer"></footer>
+          </div>
+
+          
+  
+
+
+
+
+</body>
+</html>
+

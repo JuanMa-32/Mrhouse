@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--FRAGMENTO DE HEAD-->
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    
+
+    <div class="container-fluid">
+        <!--NAVBAR PARA USUARIOS LOGUEADOS-->
+    <nav th:replace="fragments/navbar_logueado :: navbarLog"></nav>
+    
+          
+              <!--tarjeta CON LAS PUBLICACIONES-->
+             
+          
+              <div class="album py-5 bg-body-tertiary">
+                <div class="container">
+              <div class="row row-cols-1 row-cols-md-3 g-4"  >
+                <div class="col" th:each="inmueble : ${inmuebles}" th:if="${inmueble.alta==true}">
+                  <div class="card h-100">
+                    <img th:src="@{/imagen/{img} (img=${inmueble.foto})}" class="card-img-top" th:alt=${inmueble.foto}>
+                    <div class="card-body">
+                      <h5 class="card-title"  th:text="${inmueble.nombre}"> </h5>
+                      <p class="card-text" th:text="${inmueble.descripcion}"></p>
+                      <small class="text-body-secondary" th:text="${'Se '+inmueble.condicion}">Last updated 3 mins ago</small>
+                    </div>
+                    <div class="card-footer">
+                      <button type="button" class="btn btn-outline-info btn-sm"><a class="nav-link" th:href="@{/ver/__${inmueble.id}__}">Ver</a></button>
+                      <button type="button" class="btn btn-outline-info btn-sm"  ><a class="nav-link" th:href="@{/inmueble/eliminar/__${inmueble.id}__}" >eliminar</a></button>
+                      <button type="button" class="btn btn-outline-info btn-sm"  ><a class="nav-link" th:href="@{/inmueble/publicar/__${inmueble.id}__}" >Editar</a></button>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+                </div>
+              </div>
+    
+      <div class="container">
+        <!--PIE DE PAGINA FIJO-->
+        <footer th:replace="/fragments/footer :: footer"></footer>
+      </div>
+
+    </div>
+</body>
+</html>

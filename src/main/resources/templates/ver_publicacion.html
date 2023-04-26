@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--FRAGMENTO DE HEAD-->
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    <div class="container-fluid">
+       
+        <nav class="navbar navbar-expand-lg  bg-dark rounded" data-bs-theme="dark" aria-label="Thirteenth navbar example" th:fragment="navbarLog">
+          <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+      
+            <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+             <a class="navbar-brand col-lg-3 me-0" th:if="${session.usuariosession == null}" th:href="@{/}">Volver</a>
+              <a class="navbar-brand col-lg-3 me-0" sec:Authorize="hasAnyRole('ROLE_ENTE','ROLE_CLIENT')" th:href="@{/inicio}">Volver</a>
+              <a class="navbar-brand col-lg-3 me-0"sec:Authorize="hasRole('ADMIN')" th:href="@{/admin/dashboard}">Volver</a>
+              <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+               
+                <li class="nav-item dropdown">
+                  <li style="color: aliceblue; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><h2>MrHouse</h2></li>
+                </li>
+      
+                <li class="nav-item dropdown">
+                 
+                </li>
+              
+               
+              </ul>
+              <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+                <button type="button" class="btn btn-outline-info btn-sm"><a class="nav-link" th:href="@{/usuario/registrar/{id} (id=${'0'})}" th:if="${session.usuariosession == null}" >Registrarme</a></button>
+                <button type="button" class="btn btn-outline-info btn-sm"><a class="nav-link" th:href="@{/usuario/login}" th:if="${session.usuariosession == null}">Iniciar Sesion</a></button>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+
+      <div class="container">
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                <h2 class="featurette-heading fw-normal lh-1" th:text="${inmueble.nombre}">Oh yeah, it’s that good.
+                </h2>
+                <h4 class="lead" th:text="${inmueble.descripcion}"></h4>
+                <span style="display: inline-block;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                      <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                    </svg>
+                    <p class="lead" th:text="${inmueble.ubicacion}"></p>
+                  </span>
+                  <h4 class="lead" th:text="${'Precio: '+inmueble.precio}"></h4>
+                  <h4 class="lead" th:text="${'Cantidad de Personas: '+inmueble.cantPersonas}"></h4>
+                  <h4 class="lead" th:text="${'Tipo de inmueble: '+inmueble.tipoDeVivienda}"></h4>
+                  <h4 class="lead" th:text="${'Habitaciones: '+inmueble.cantHabitacion}"></h4>
+                  
+
+
+
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img th:src="@{/imagen/{img} (img=${inmueble.foto})}" class="card-img-top" th:alt=${inmueble.foto}>
+            </div>
+        </div>
+
+
+        <div class="table-responsive">
+            <table class="table text-center">
+
+                <tbody>
+                    <tr>
+                        <th scope="row" class="text-start">TV</th>
+                        <td><svg th:if="${inmueble.tv}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                            </svg></td>
+                        <td><svg th:unless="${inmueble.tv}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                            </svg></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="text-start">Wifi</th>
+                        <td><svg th:if="${inmueble.wifi}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                            </svg></td>
+                        <td><svg th:unless="${inmueble.wifi}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                            </svg></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row" class="text-start">Desayuno</th>
+                        <td><svg th:if="${inmueble.desayuno}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                            </svg></td>
+                        <td><svg th:unless="${inmueble.desayuno}" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                            </svg></td>
+                    </tr>
+
+                </tbody>
+
+
+            </table>
+        </div>
+
+
+       
+
+<!--PIE DE PAGINA FIJO-->
+<footer th:replace="/fragments/footer :: footer"></footer>
+
+
+    </div>
+</body>
+</html>

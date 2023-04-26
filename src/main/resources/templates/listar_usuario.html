@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--FRAGMENTO DE HEAD-->
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    
+    <div class="container-fluid">
+
+      <nav class="navbar navbar-expand-lg  bg-dark rounded" data-bs-theme="dark" aria-label="Thirteenth navbar example" th:fragment="navbarLog">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
+            aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+            <a class="navbar-brand col-lg-3 me-0" th:href="@{/admin/dashboard}">Volver</a>
+            <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+              <li style="color: aliceblue; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><h2>MrHouse</h2></li>
+            </ul>
+            <div class="dropdown">
+              <a class="btn btn-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-label="Second group" aria-expanded="false">
+                Perfil</a>
+      
+              <ul class="dropdown-menu">
+                <li ><a class="dropdown-item" th:href="@{/usuario/perfil/__${session.usuariosession.id}__}"> Perfil</a></li>
+                <li><a class="dropdown-item" th:href="@{/admin/listarPublicaciones}"> Publicaciones</a></li>
+                <li><a class="dropdown-item" th:href="@{/admin/listarClient}"> Usuarios Particular</a></li>
+                <li><a class="dropdown-item" th:href="@{/admin/listarEntes}"> Usuarios Profesional</a></li>
+                <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Session</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+
+
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Usuarios Registrados</font></font></h1>
+        <p class="fs-5 text-body-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Estos Usuarios han creado una cuenta en MrHouse</font></font></p>
+      </div>
+
+<div class="container">
+    <table class="table table-dark" >
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rol</th>
+            
+          </tr>
+        </thead>
+        <tbody th:each="usuario : ${us}">
+          <tr>
+            
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.email}"></td>
+            <td th:text="${usuario.rol}"> </td>
+          </tr>
+         
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container">
+      <!--PIE DE PAGINA FIJO-->
+      <footer th:replace="/fragments/footer :: footer"></footer>
+    </div>
+
+</body>
+</html>

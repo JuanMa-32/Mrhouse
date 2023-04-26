@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--FRAGMENTO DE HEAD-->
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+
+  <div class="container-fluid">
+       
+    <nav class="navbar navbar-expand-lg  bg-dark rounded" data-bs-theme="dark" aria-label="Thirteenth navbar example" th:fragment="navbarLog">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+          <a class="navbar-brand col-lg-3 me-0"  th:href="@{/}">Volver</a>
+        
+          <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+           
+            <li class="nav-item dropdown">
+              <li style="color: aliceblue; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><h2>MrHouse</h2></li>
+            </li>
+  
+            <li class="nav-item dropdown">
+             
+            </li>
+          
+           
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+
+     
+  <div class="container">
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+         
+          <img src="/mrhouseregis.jpg" class="card-img-top" width="850px" height="575px">
+
+        </div>
+
+        <div class="col-md-5">
+          <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Registrarse</font></font></h4>
+            <form class="needs-validation" th:action="@{/usuario/registro}" th:object="${usuario}" method="POST">
+             <input hidden th:value="${usuario.id}" name="id">
+              <div class="col-12">
+                <label for="email" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre </font></font><span class="text-body-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span></label>
+                <input type="text" class="form-control" id="email" th:field="*{nombre}">
+                <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+              </div>
+    
+                <div class="col-12">
+                  <label for="email" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Correo electrónico </font></font><span class="text-body-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span></label>
+                  <input type="email" class="form-control" id="email" placeholder="tu@ejemplo.com" th:field="*{email}">
+                  <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                </div>
+    
+              
+    
+                <div class="col-12">
+                  <label for="address2" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Telefono </font></font><span class="text-body-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span></label>
+                  <input type="text" class="form-control" id="address2"  th:field="*{telefono}">
+                </div>
+    
+                <div class="col-md-5">
+                  <label for="country" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">País</font></font></label>
+                  <select class="form-select" id="country"  th:field="*{pais}">
+                   
+                      <option value="Argentina">Argentina</option>
+                      <option value="Brasil">Brasil</option>
+                      <option value="Uruguay">Uruguay</option>
+                      <option value="Chile">Chile</option>
+                      <option value="Paraguay">Paraguay</option>
+                      <option value="Bolivia">Bolivia</option>
+                      <option value="Peru">Peru</option>
+                      <option value="Venezuela">Venezuela</option>
+                    </select>
+                  </select>
+                 
+                </div>
+    
+                <div class="col-md-6">
+                  <label for="cc-number" class="form-label" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dni</font></font></label>
+                  <input type="text" class="form-control" id="cc-number" th:field="*{dni}" >
+            
+                </div>
+               
+                
+                <div class="col-md-6">
+                  <label for="cc-number" class="form-label" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Contraseña</font></font></label>
+                  <input type="password" class="form-control" id="cc-number"th:field="*{password}" >
+            
+                </div>
+    
+             
+                
+               
+                
+              <button class="w-100 btn btn-primary btn-lg" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Registrarme</font></font></button>
+                
+                
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>     
+        
+    
+   
+        <div class="container">
+          <!--PIE DE PAGINA FIJO-->
+          <footer th:replace="/fragments/footer :: footer"></footer>
+        </div>
+
+</body>
+</html>

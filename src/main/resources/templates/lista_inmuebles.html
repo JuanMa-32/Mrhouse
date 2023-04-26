@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<!--FRAGMENTO DE HEAD-->
+<head th:replace="/fragments/head :: head"></head>
+
+
+<body>
+     <div class="container-fluid">
+    <!--BARRA DE NAVEGACION-->
+    <nav class="navbar navbar-expand-lg  bg-dark rounded" data-bs-theme="dark" aria-label="Thirteenth navbar example" >
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+            <a class="navbar-brand col-lg-3 me-0" href="#">MrHouse</a>
+            <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+             
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Casas</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" th:href="@{/casaAlquila } ">Alquiler</a></li>
+                  <li><a class="dropdown-item"  th:href="@{/casaVende}">Venta</a></li>
+                  
+                </ul>
+              </li>
+    
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Departamentos</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" th:href="@{/deptoAlquila } ">Alquiler</a></li>
+                  <li><a class="dropdown-item" th:href="@{/deptoVende} ">Venta</a></li>
+                  
+                </ul>
+              </li>
+            
+             
+            </ul>
+            <div class="dropdown"th:if="${session.usuariosession != null}" >
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Perfil
+                </a>
+              
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" th:href="@{inmueble/misPublicaciones}"  sec:Authorize="hasRole('ENTE')">Mis Propiedades</a></li>
+                  <li><a class="dropdown-item" th:href="@{/usuario/perfil/__${session.usuariosession.id}__}">Perfil</a></li>
+                  <li><a class="dropdown-item" th:href="@{/inmueble/publicar/{id} (id=${'0'}) }" sec:Authorize="hasRole('ENTE')">Publicar</a></li>
+                  <li><a class="dropdown-item" th:href="@{/inmueble/turnosEnte}" sec:Authorize="hasRole('ENTE')">Turnos</a></li>
+                  <li><a class="dropdown-item" th:href="@{/usuario/turnosClient}" sec:Authorize="hasRole('CLIENT')">Turnos</a></li>
+                  <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Session</a></li>
+                </ul>
+              </div>
+          </div>
+          <div class="d-lg-flex col-lg-3 justify-content-lg-end" th:if="${session.usuariosession == null}">
+            <button type="button" class="btn btn-outline-info btn-sm"><a class="nav-link" th:href="@{/registrar}" >Registrarme</a></button>
+            <button type="button" class="btn btn-outline-info btn-sm"><a class="nav-link" th:href="@{/login}" >Iniciar Sesion</a></button>
+          </div>
+        </div>
+      </nav>
+
+
+
+          <!--tarjeta CON LAS PUBLICACIONES-->
+    <div class="album py-5 bg-body-tertiary">
+      <div class="container">
+
+       <div th:replace="/fragments/tarjeta :: tarjeta"></div>
+
+
+      </div>
+    </div>
+
+<div class="container">
+  <!--PIE DE PAGINA FIJO-->
+  <footer th:replace="/fragments/footer :: footer"></footer>
+</div>
+
+     </div>
+</body>
+</html>

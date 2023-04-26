@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--FRAGMENTO DE HEAD-->
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+    
+  <div class="container-fluid">
+       
+    <nav class="navbar navbar-expand-lg  bg-dark rounded" data-bs-theme="dark" aria-label="Thirteenth navbar example" th:fragment="navbarLog">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+        
+          <a class="navbar-brand col-lg-3 me-0" th:href="@{/inicio}">Volver</a>
+          
+          <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+           
+            <li class="nav-item dropdown">
+              <li style="color: aliceblue; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><h2>MrHouse</h2></li>
+            </li>
+  
+            <li class="nav-item dropdown">
+             
+            </li>
+          
+           
+          </ul>
+          <div class="dropdown">
+            <a class="btn btn-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-label="Second group" aria-expanded="false">
+              Perfil</a>
+  
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" th:href="@{/inmueble/misPublicaciones}" sec:Authorize="hasRole('ENTE')">Mis publicaciones</a></li>
+              <li><a class="dropdown-item" th:href="@{/inmueble/publicar/{id} (id=${'0'}) }" sec:Authorize="hasRole('ENTE')">Publicar</a></li>
+              <li><a class="dropdown-item" th:href="@{/usuario/perfil/__${session.usuariosession.id}__}"> Perfil</a></li>
+              <li><a class="dropdown-item" th:href="@{/inmueble/turnosEnte}" sec:Authorize="hasRole('ENTE')">Turnos</a></li>
+              <li><a class="dropdown-item" th:href="@{/usuario/turnosClient}" sec:Authorize="hasRole('CLIENT')">Turnos</a></li>
+              <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Session</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+            <h1 class="display-4 fw-normal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Turnos</font></font></h1>
+            <p class="fs-5 text-body-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Estos son todos los clientes que sacaron turno para ver algunas de sus propiedades.</font></font></p>
+          </div>
+<div class="container">
+          <div class="row mt-5" th:unless="${turnosInmueble.size}">
+            <div class="col-12">
+              <h2>No hay turnos </h2>
+            </div>
+          </div>
+        <table class="table table-dark" th:if="${turnosInmueble.size}">
+            <thead>
+              <tr>
+                <th scope="col">cliente</th>
+                <th scope="col">Inmueble</th>
+                <th scope="col">Fecha</th>
+                
+              </tr>
+            </thead>
+            <tbody th:each="turnos : ${turnosInmueble}">
+              <tr>
+                
+                <td th:text="${turnos.usuario.nombre}"></td>
+                <td th:text="${turnos.inmueble.nombre}"></td>
+                <td th:text="${turnos.fecha}"></td>
+              </tr>
+             
+            </tbody>
+          </table>
+
+<!--PIE DE PAGINA FIJO-->
+<footer th:replace="/fragments/footer :: footer"></footer>
+        </div>
+</body>
+</html>

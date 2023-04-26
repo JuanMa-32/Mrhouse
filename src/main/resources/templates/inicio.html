@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--FRAGMENTO DE HEAD-->
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body >
+
+
+  <div class="container-fluid">
+    
+    <!--NAVBAR PARA USUARIOS LOGUEADOS-->
+    <nav th:replace="fragments/navbar_logueado :: navbarLog"></nav>
+
+    <div class="alert alert-danger" role="alert" th:if="${exito!=null}" th:text="${exito}">
+
+    </div>
+
+    <div class="alert alert-dismissible alert-success" th:if="${turnoAsignado!=null}">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong th:text="${turnoAsignado}"></strong>
+    </div>
+  </div>
+
+  <div class="text-danger" th:if="${vacio==true}" th:text="${vacio}"></div>
+
+    <!--tarjeta CON LAS PUBLICACIONES-->
+    <div class="album py-5 bg-body-tertiary">
+      <div class="container">
+
+       <div th:replace="/fragments/tarjeta :: tarjeta"></div>
+
+
+      </div>
+    </div>
+
+<div class="container">
+  <!--PIE DE PAGINA FIJO-->
+  <footer th:replace="/fragments/footer :: footer"></footer>
+</div>
+
+
+</body>
+
+</html>
